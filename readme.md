@@ -52,6 +52,9 @@ User Role: Can only specify date range. also can only see his account statement
 
 #### Endpoints
 
+you can find a postman colloction for the api endpoints at postman_collection.json
+
+GET api/authenticate  : endpoint for authenticating
 GET api/statements: Endpoint for viewing statements.
 Parameters:
 * accountNumber: Optional. Specifies the account number.
