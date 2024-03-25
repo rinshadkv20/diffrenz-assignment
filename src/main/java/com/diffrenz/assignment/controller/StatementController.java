@@ -4,6 +4,7 @@ import com.diffrenz.assignment.service.StatementService;
 import com.diffrenz.assignment.service.VM.StatementVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import static com.diffrenz.assignment.service.AuthService.getCurrentUserRoles;
 
 @RestController
 @RequestMapping("/api")
@@ -45,12 +48,13 @@ public class StatementController {
             @RequestParam(required = false) Double amountTo) {
         log.debug("REST request to get a list of Statements");
 
+        if (!getCurrentUserRoles().contains("ADMIN")) {
+            if (accountNumber != null || amountFrom != null || amountTo != null) {
+                throw new AccessDeniedException("Access denied unauthorized parameters");
+            }
+        }
         return statementService.getStatements(accountNumber, amountFrom, amountTo, fromDate, toDate);
 
     }
 
 }
-
-
-
-
