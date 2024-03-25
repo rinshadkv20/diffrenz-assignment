@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: assignment
+  security:
+    jwt:
+      secret-key: "N2E3YWVhNmJiN2Y3ZThjMmQ2NTkyODg1MDM4MzY1NzdhMjE5NThiMWJkYTQyZjMxNDg3MGE5ZTlkM2Y1Y2JjYzE4MGFjZDU1NGNhYzY1N2I0YmQ0ZWEyYTBiM2U1OTgwZGM3YjcwODIyYTcxNWViNjcwNDJlNTZhMjJhMGJlNmU"
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/console
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+    schema: classpath:data.sql
+  sql:
+    init:
+      mode: always
+logging:
+  level:
+      org.springframework.security: DEBUG
+      org.springframework.security.authentication: DEBUG
+      org.springframework.security.authorization: DEBUG
+      org.springframework.security.access: DEBUG
+
+    
